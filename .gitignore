@@ -1,0 +1,11 @@
+*.aep
+*.ai
+*.psd
+*.indd
+*.prproj
+output/
+renders/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
