@@ -8,12 +8,33 @@ ExtendScript (JSX) and Python scripts for automating Adobe Illustrator and After
 
 | Folder | Contents |
 |--------|----------|
-| `illustrator/` | JSX scripts for Illustrator — batch export, artboard management, layer automation |
+| `illustrator/` | JSX scripts + Python pipeline for Illustrator — sticker pack export, batch artboard export, vectorize, layer automation |
 | `after-effects/` | JSX scripts for After Effects — render queue automation, layer control, expression helpers |
 
 ---
 
 ## Illustrator Scripts
+
+### `illustrator/sticker_pack_export_pipeline.py` ★
+Full end-to-end sticker pack export pipeline — Python drives Illustrator via COM (win32com), with an embedded JSX script executing inside Illustrator to export each group item. Handles the entire commercial release workflow:
+
+- Exports every sticker group at **1000×1000 PNG**, **600×600 JPEG**, and **SVG vector** formats
+- Generates **watermarked preview samples** for each sticker (separate transparent overlay pass)
+- **Resizes** all exports down to 300×300 and 600×600 derivatives via Pillow
+- **Organises** all outputs into a clean commercial folder structure (`PNGs/300x300/`, `JPEGs/600x600/`, `Vectors/`, `PDFs/`, `SAMPLES/`)
+- Generates **printable sticker sheet PDFs** with cut lines and optional registration marks (Cricut + Silhouette versions) via ReportLab
+- Creates a **promotional collage video** (MP4) from the 300×300 thumbnails via OpenCV
+- **Zips** the final pack ready for marketplace upload
+- Optionally chains to a Photoshop script for cover image generation
+
+```
+pip install -r requirements.txt
+python illustrator/sticker_pack_export_pipeline.py
+```
+
+> Requires Illustrator to be running. A Tkinter dialog will prompt for root folder and pack name.
+
+---
 
 ### `illustrator/batch_export_artboards.jsx`
 Exports every artboard in the active document as an individual PNG/SVG/PDF — auto-named by artboard name. Configurable output format, scale, and destination folder.
@@ -58,7 +79,8 @@ Applies uniform settings (resolution, framerate, duration) across all compositio
 ## Tech
 
 - **ExtendScript (JSX)** — Adobe's scripting layer (ES3-based), runs natively in Illustrator and After Effects without any install
-- **Python** (where noted) — for file system operations and pipeline glue where ExtendScript can't reach
+- **Python + win32com** — drives Illustrator headlessly via COM, with inline JSX injected at runtime for full Illustrator API access
+- **Pillow / OpenCV / ReportLab** — image resizing, video generation, and PDF sticker sheet creation in the export pipeline
 
 ---
 
