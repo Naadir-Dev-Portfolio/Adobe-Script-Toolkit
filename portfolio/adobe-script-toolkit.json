@@ -1,0 +1,17 @@
+{
+  "section": "python",
+  "category": "automation",
+  "n": 1,
+  "title": "Adobe Script Toolkit",
+  "videoId": "JtVEtAiz0UU",
+  "desc": "Full Adobe automation toolkit — Python drives Illustrator via COM to run a complete sticker pack export pipeline (multi-size PNG/JPEG/SVG, watermarked previews, PDF sticker sheets, promo video). Plus native JSX scripts for Illustrator and After Effects: batch artboard export, vectorize, layer renaming, render queue automation.",
+  "code": "https://github.com/Naadir-Dev-Portfolio/Adobe-Script-Toolkit/blob/main/illustrator/sticker_pack_export_pipeline.py",
+  "details": "https://github.com/Naadir-Dev-Portfolio/Adobe-Script-Toolkit/blob/main/README.md",
+  "tags": [
+    "python",
+    "automation",
+    "extendscript",
+    "adobe",
+    "jsx"
+  ]
+}
